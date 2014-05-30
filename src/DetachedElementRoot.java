@@ -4,9 +4,11 @@ import java.util.Map;
 
 public class DetachedElementRoot {
 
-    Map<String, String> attrs = new HashMap<String, String>();
+    private String tagName = "";
+    private Map<String, String> attrs = new HashMap<String, String>();
     
-    public DetachedElementRoot(Map<String, String> a){
+    public DetachedElementRoot(String name, Map<String, String> a){
+        tagName = name;
         attrs = a;
     }
     

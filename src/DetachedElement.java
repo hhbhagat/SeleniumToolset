@@ -5,35 +5,32 @@ import java.util.Map;
 
 public class DetachedElement {
 
-    ArrayList<DetachedElement> childrenArr = null;
-    DetachedElementRoot root = null;
-    Map<String, String> attrs = new HashMap<String, String>();
-    boolean isRoot = false;
+    private ArrayList<DetachedElement> childrenArr = null;
+    private DetachedElementRoot root = null;
+    private Map<String, Map<String, String>> tags = new HashMap<String, Map<String, String>>();
+    private boolean isRoot = false;
 
     public DetachedElement() {
         childrenArr = new ArrayList<DetachedElement>();
     }
 
-    public void setRoot(Map<String, String> a) {
-        root = new DetachedElementRoot(a);
+    public void setRoot(String tagName, Map<String, String> a) {
+        root = new DetachedElementRoot(tagName, a);
         isRoot = true;
     }
 
-    public void addAttr(String k, String v) {
-        attrs.put(k, v);
+    public void addTag(String tag, Map<String, String> attrMap) {
+        tags.put(tag, attrMap);
     }
 
-    public String[] getAttr(String q) {
-        String[] pair = new String[2];
-        if (attrs.containsKey(q)) {
-            pair[0] = q;
-            pair[1] = attrs.get(q);
-        } else {
-            return null;
+    public ArrayList<Map<String, String>> getTags(String q) {
+        ArrayList<Map<String, String>> foundTags = new ArrayList<Map<String, String>>();
+        for (Map<String, String> m : tags.values()) {
+            if (m.containsKey(q)) {
+                foundTags.add(m);
+            }
         }
-        return pair;
+        return foundTags;
     }
-    
-    
 
 }
